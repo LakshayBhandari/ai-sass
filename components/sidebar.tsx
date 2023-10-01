@@ -7,6 +7,7 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 import { Code, ImageIcon, LayoutDashboard, MessageSquare, Music, Settings, VideoIcon } from "lucide-react";
 import { usePathname } from 'next/navigation'
+import FreeCounter from './free-counter'
 
 const montserrat=Montserrat({weight:"600",subsets:["latin"]});
 
@@ -54,7 +55,10 @@ const routes = [
   },
 ];
 
-function Sidebar() {
+interface SidebarProps{
+  apiLimitCount:number;
+}
+function Sidebar({apiLimitCount = 0}:SidebarProps) {
   const pathname=usePathname();
   return (
     <div className='space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white'>
@@ -83,6 +87,9 @@ function Sidebar() {
              ))}
           </div>
         </div>
+        <FreeCounter
+        apiLimitCount={apiLimitCount}
+        />
     </div>
   )
 }
