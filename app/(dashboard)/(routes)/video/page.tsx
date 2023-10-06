@@ -18,9 +18,10 @@ import UserAvatar from "@/components/userAvatar";
 import BotAvatar from "@/components/bot-avatar";
 
 import { ChatCompletionRequestMessage } from "openai";
+import { useProModal } from "@/hooks/user-pro-modal";
 function Videopage() {
   const router = useRouter();
- 
+  const proModal=useProModal();
   const [video, setVideo] = useState<string>();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -41,7 +42,7 @@ function Videopage() {
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
-       
+        proModal.onOpen()
       } else {
        
       }

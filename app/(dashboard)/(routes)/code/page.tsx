@@ -18,8 +18,11 @@ import UserAvatar from "@/components/userAvatar";
 import BotAvatar from "@/components/bot-avatar";
 import { ChatCompletionRequestMessage } from "openai";
 import ReactMarkdown from "react-markdown";
+import { useProModal } from "@/hooks/user-pro-modal";
 function CodePage() {
   const router = useRouter();
+  const proModal=useProModal();
+  
   
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
 
@@ -43,7 +46,7 @@ function CodePage() {
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
-   
+        proModal.onOpen()
       } else {
        
       }

@@ -18,9 +18,10 @@ import UserAvatar from "@/components/userAvatar";
 import BotAvatar from "@/components/bot-avatar";
 
 import { ChatCompletionRequestMessage } from "openai";
+import { useProModal } from "@/hooks/user-pro-modal";
 function Musicpage() {
   const router = useRouter();
- 
+  const proModal=useProModal();
   const [music, setMusic] = useState<string>();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -41,7 +42,7 @@ function Musicpage() {
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
-       
+        proModal.onOpen()
       } else {
        
       }

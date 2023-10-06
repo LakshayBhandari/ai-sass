@@ -25,10 +25,11 @@ import {
 import { SelectContent } from "@radix-ui/react-select";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import { useProModal } from "@/hooks/user-pro-modal";
 
 function Conversationpage() {
   const router = useRouter();
- 
+  const proModal=useProModal();
   const [photos, setPhotos] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -53,7 +54,7 @@ function Conversationpage() {
       setPhotos(urls);
     } catch (error: any) {
       if (error?.response?.status === 403) {
-      
+        proModal.onOpen()
       } else {
        
       }
